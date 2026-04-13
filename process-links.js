@@ -23,7 +23,9 @@ const lines = rawContent.split(/\n/).map(l => l.trim()).filter(l => l.length > 0
 const PATTERN_DETAIL = /gettyimages\.com\/detail\/(\d{7,})/g;
 // Pattern 2: items:'{ID}' or items: '{ID}'
 const PATTERN_ITEMS = /items:\s*['"](\d{7,})['"]/g;
-// Pattern 3: standalone large number (10+ digits) as fallback
+// Pattern 3: standalone large number (10+ digits) as fallback.
+// NOTE: This may match non-Getty numbers (timestamps, etc.). It is only
+// used when patterns 1 and 2 find nothing in the given text block.
 const PATTERN_FALLBACK = /\b(\d{10,})\b/g;
 
 function extractIdsFromText(text) {
@@ -63,7 +65,7 @@ for (const line of lines) {
   for (const id of ids) allIds.add(id);
 }
 
-const uniqueIds = Array.from(allIds);
+const uniqueIds = Array.from(allIds).sort();
 
 // Read existing config.json to preserve settings and playlist
 let existingConfig = {};

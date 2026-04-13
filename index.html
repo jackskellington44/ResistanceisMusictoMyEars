@@ -43,10 +43,10 @@
 
 <div id="panels">
   <div class="panel" id="panel-left">
-    <iframe id="iframe-left" src="" frameborder="0" scrolling="no"></iframe>
+    <iframe id="iframe-left" src="" scrolling="no"></iframe>
   </div>
   <div class="panel" id="panel-right">
-    <iframe id="iframe-right" src="" frameborder="0" scrolling="no"></iframe>
+    <iframe id="iframe-right" src="" scrolling="no"></iframe>
   </div>
 </div>
 
@@ -119,6 +119,8 @@
   }
 
   function setIframeSrc(iframeEl, imageId) {
+    // Only allow numeric IDs to prevent unexpected URL construction
+    if (!/^\d+$/.test(imageId)) return;
     iframeEl.src = 'https://embed.gettyimages.com/embed/' + imageId;
   }
 
@@ -171,6 +173,11 @@
   function loadTrack(index) {
     trackIndex = index;
     var filename = config.playlist[trackIndex];
+    // Reject filenames with path traversal sequences
+    if (!filename || filename.indexOf('..') !== -1 || filename.indexOf('/') !== -1) {
+      console.error('Invalid playlist filename:', filename);
+      return;
+    }
     audioEl.src = 'audio/' + encodeURIComponent(filename);
     audioEl.play().catch(function (err) {
       console.error('Audio play error:', err);
