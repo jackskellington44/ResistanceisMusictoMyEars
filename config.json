@@ -1,17 +1,18 @@
 {
   "images": [
-    {
-      "id": "getty123",
-      "embedUrl": "https://embed.gettyimages.com/embed/123456789",
-      "html": "<iframe src='https://embed.gettyimages.com/embed/123456789' frameborder='0' scrolling='no' width='150' height='150'></iframe>",
-      "flashDuration": 2.5,
-      "category": "abstract"
-    }
+    "1321139945",
+    "1234567890",
+    "0987654321",
+    "1456789012",
+    "1567890123"
   ],
   "settings": {
-    "beatSensitivity": 0.7,
-    "maxConcurrent": 15,
-    "flashDuration": 2.0,
-    "colorScheme": "monochrome"
-  }
+    "beatSensitivity": 0.65,
+    "flashDuration": 0.3,
+    "maxConcurrent": 2
+  },
+  "playlist": [
+    "01 - Gulch - Monkey Gone To Heaven.mp3",
+    "01 - fakemink - Music and Me.mp3"
+  ]
 }
